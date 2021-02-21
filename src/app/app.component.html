@@ -1,0 +1,108 @@
+ <!----Navbar & all links & buttons on Header-->>
+  <nav class="navbar navbar-inverse fixed-top" style="margin-bottom: 0px; margin-top: 0px; padding: -200px;">
+    <div class="container">
+      <div class="navbar-header logoImage">
+      </div>
+      <div class="nav navbar-right">
+          <li><a href="#" class="headingLinks">Products</a></li>
+          <li><a href="#" class="headingLinks">Solutions</a></li>
+          <li><a href="#"class="headingLinks">Pricing</a></li>
+          <li><button type="button" class="loginButton" (click)="onLogin()">Login</button></li>
+          <li><button type="button" class="startedButton" (click)="onGetStarted()">Get Started</button></li>
+      </div>
+    </div>
+  </nav>
+   <!----Calculator & images Section-->> 
+  <div class="smallBlob">
+        <!---Images & Dots-->>
+        <h2 style="margin-left: 30px;">We make it Super</h2>
+        <h2 style="margin-left: 30px;">Simple</h2>
+        <img src= 'assets\accounting_dots.png' class="dots" >
+        <img src='assets\collect_img-video.png' class="vidImage">
+        <img src='assets\accounting_dots.png' class="dotsright">
+        <!----Loan Details Card-->
+        <div class="loanCard">
+            <div class="container">
+                <h6 style="margin-left: 200px; margin-top: 20px; color:lavender;">Loan Amount</h6>
+                <p style="margin-left: 215px; color: lavender;">{{'100000'|currency:'INR':true:'1.0'}}</p>
+                <h6 style="margin-left: 190px; margin-top: 20px; color:lavender;">Your EMI will be</h6>
+                <p style="margin-left: 215px; color: lavender;">{{'15000'|currency:'INR':true:'1.0'}}</p>
+                <button type="button" style="margin-top: 10px; margin-left: 200px; border-color: white; border-radius: 10px; color: white;" (click)="onGetMoney()" class="btn">Get Money</button>
+            </div>
+        </div>
+        <!---Eligibility Calculator-->
+        <div class="card" style="margin-top: -300px; margin-left: 800px;">
+            <div class="container">
+                <div>
+                      <h5 style="text-align: center;">Eligibility Calculator</h5>
+                      <p style="margin-top: 40px; font-size: 10px;">Monthly Income</p>
+              
+                      <div>
+                            <b class="gridSizeValue">{{gridsize.value|currency:'INR':true:'1.0'}}</b>
+                      </div>
+                      <!---Slider for Income-->
+                      <mat-slider #gridsize (change)="updateSetting($event)" min="100000" max="300000" step="1" [value]="gridSize" tickInterval="1"></mat-slider>
+                      <span style="font-size: 10px; margin-top: 0px; padding: 0px;">{{'100000'|currency:'INR':true:'1.0'}}</span>
+                      <span style="font-size: 10px; margin-top: 0px; padding: 0px; margin-left: 180px;">{{'300000'|currency:'INR':true:'1.0'}}</span>
+                      <p style="margin-top: 5px; font-size: 10px;">Monthly Expense</p>
+                      <div>
+                            <b class="gridSizeValue">{{gridexpense.value|currency:'INR':true:'1.0'}}</b>
+                      </div>
+                      <!----Expense Slider-->
+                      <mat-slider #gridexpense (change)="updateExpense($event)" min="10000" max="100000" step="1" [value]="gridExpense" tickInterval="1"></mat-slider>
+                      <p style="margin-top: 5px; font-size: 10px;">Repayment Tenure</p>
+                      <!----Dropdown for Repayment Tenure -->
+                      <div>
+                            <select style="margin-left: 60px; padding-left: 15px; padding-right: 15px; border-radius: 15px; padding-top: 5px; padding-bottom: 5px; border-color: purple; color: purple;">
+                                <option *ngFor="let duration of tenures" [value]="duration">
+                                    {{duration}}
+                                </option>
+                            </select>
+                      </div>      
+                      <div style="margin-top: 20px;">
+                          <span style="font-size: 10px;">Do you have any existing loans</span>   
+                          <label class="switch" style="margin-left: 70px;">
+                          <input type="checkbox">
+                          <span class="slider round"></span>
+                          </label>
+                      </div>
+                </div>
+            </div>
+        </div>
+  </div>
+
+<!--Cards & Card Details-->      
+<div style="margin-top: 100px; margin-left: 0px; padding-bottom: 20px;" class="solWave">
+        <!----Looping Card Details for publishing Cards & all its details-->
+        <div *ngFor="let cnumber of cardDetails; let i=index">
+    
+            <div class="cardDetail" (click)="onCardDetails(cnumber)" cardHighlighter *ngIf="i<=2; else noserver">
+                <div class="container">
+                      <img [src]=cnumber.imgUrl style="margin-left: 10px; margin-top: 10px;">
+                      <h6>{{cnumber.highlight}}</h6>
+                      <p style="font-size: smaller;">{{cnumber.description}}</p>
+                </div>
+            </div>
+            <ng-template #noserver>
+              <div class="cardDetails2" (click)="onCardDetails(cnumber)" cardHighlighter [ngStyle]="i==4?{'margin-top':'-50px'}:{'margin-top':'-500px'}">
+                <div class="container">
+                  <img [src]=cnumber.imgUrl style="margin-left: 10px; margin-top: 10px;">
+                  <h6>{{cnumber.highlight}}</h6>
+                  <p style="font-size: smaller;">{{cnumber.description}}</p>
+                </div>
+              </div>
+            </ng-template>
+        </div>
+</div>
+    
+<!--Opening Account & Button to open Account -->
+<div style="margin-left: 800px; margin-top: -450px;">
+      <h2>Boost your business</h2>
+      <h2>with Open</h2>
+      <h6 style="margin-top: 50px;">Gets your hands on a term loan that's</h6>
+      <h6> crafted for your business</h6>
+      <button type="button" class="btn openClass" (click)="onOpenAccount()" cardHighlighter>Get an Open Account</button>
+</div>
+        
+    
+
